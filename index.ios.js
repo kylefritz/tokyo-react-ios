@@ -1,6 +1,6 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
+ * Restaurant List
+ *
  */
 'use strict';
 
@@ -16,7 +16,7 @@ var {
 
 var REQUEST_URL = 'https://orderup.com/api/markets/44/restaurants';
 
-var AwesomeProject = React.createClass({
+var Tokyo = React.createClass({
   getInitialState: function(){
     return {
       dataSource: new ListView.DataSource({
@@ -109,4 +109,4 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('AwesomeProject', () => AwesomeProject);
+AppRegistry.registerComponent('Tokyo', () => Tokyo);
