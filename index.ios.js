@@ -14,7 +14,7 @@ var {
   View,
 } = React;
 
-var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+var REQUEST_URL = 'https://orderup.com/api/markets/44/restaurants';
 
 var AwesomeProject = React.createClass({
   getInitialState: function(){
@@ -29,11 +29,15 @@ var AwesomeProject = React.createClass({
     this.fetchData();
   },
   fetchData: function(){
-    fetch(REQUEST_URL)
+    fetch(REQUEST_URL, {
+      headers: {
+        'X-Device-Id': '3'
+      },
+    })
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          dataSource: this.state.dataSource.cloneWithRows(responseData.restaurants),
           loaded: true,
         });
       })
@@ -58,16 +62,18 @@ var AwesomeProject = React.createClass({
       </View>
     );
   },
-  renderMovie: function(movie){
+  renderMovie: function(restaurant){
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: movie.posters.thumbnail}}
+          source={{uri: restaurant.logo}}
           style={styles.thumbnail}
         />
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <Text style={styles.year}>{movie.year}</Text>
+          <Text style={styles.title}>{restaurant.name}</Text>
+          <Text style={styles.year}>
+            {restaurant.specials[0] ? restaurant.specials[0].description : ""}
+          </Text>
         </View>
       </View>
     );
